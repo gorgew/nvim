@@ -18,6 +18,12 @@ end
 -- vim.keymap.set("i", "hj", "<Esc>", { noremap = true })
 map("i", "hj", "<ESC>")
 
+-- Unbind / Rebind existing <leader>f
+vim.keymap.del("n", "<leader>fn")
+vim.keymap.del("n", "<leader>ft")
+vim.keymap.del("n", "<leader>fT")
+
+map("n", "<leader>rn", "<cmd>enew<cr>", { desc = "New File" })
 -- Helix influenced keymaps
 -- Helix goto
 map("n", "gl", "$", { remap = true })
