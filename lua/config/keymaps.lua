@@ -25,6 +25,8 @@ vim.keymap.del("n", "<leader>fT")
 
 map("n", "<leader>rn", "<cmd>enew<cr>", { desc = "New File" })
 -- Helix influenced keymaps
+
+map("n", "U", "<C-r>")
 -- Helix goto
-map("n", "gl", "$", { remap = true })
-map("n", "ge", "G", { remap = true })
+map("", "gl", "$", { remap = true })
+map("", "ge", "G", { remap = true })
