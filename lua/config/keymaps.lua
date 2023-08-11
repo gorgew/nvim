@@ -24,9 +24,16 @@ vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>fT")
 
 map("n", "<leader>rn", "<cmd>enew<cr>", { desc = "New File" })
+map("n", "<leader>fT", function()
+  Util.float_term()
+end, { desc = "Terminal (cwd)" })
 -- Helix influenced keymaps
 
 map("n", "U", "<C-r>")
 -- Helix goto
 map("", "gl", "$", { remap = true })
 map("", "ge", "G", { remap = true })
+
+-- New line insert
+vim.keymap.set("n", "<CR>", "m`o<Esc>``")
+vim.keymap.set("n", "<S-CR>", "m`O<Esc>``")
