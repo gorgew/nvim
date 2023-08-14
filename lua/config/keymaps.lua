@@ -1,6 +1,7 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+local Util = require("lazyvim.util")
 
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
@@ -24,7 +25,7 @@ vim.keymap.del("n", "<leader>ft")
 vim.keymap.del("n", "<leader>fT")
 
 map("n", "<leader>rn", "<cmd>enew<cr>", { desc = "New File" })
-map("n", "<leader>fT", function()
+map("n", "<leader>T", function()
   Util.float_term()
 end, { desc = "Terminal (cwd)" })
 -- Helix influenced keymaps
