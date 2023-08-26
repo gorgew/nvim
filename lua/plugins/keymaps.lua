@@ -32,6 +32,7 @@ return {
       { "<leader><space>", vim.NIL },
       { "<leader>/", vim.NIL },
       { "<leader>f", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+      { "<leader><C-f>", Util.telescope("files"), desc = "Find Files (root dir)" },
       { "<leader>F", Util.telescope("live_grep"), desc = "Grep (root dir)" },
       { "<leader>rf", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
     },
