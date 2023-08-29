@@ -5,7 +5,7 @@ return {
       servers = {
         glslls = {
           cmd = {
-            "glsllls",
+            "glslls",
             "--stdin",
             "--target-env",
             "opengl",
@@ -13,5 +13,9 @@ return {
         },
       },
     },
+  },
+
+  {
+    "tikhomirov/vim-glsl",
   },
 }

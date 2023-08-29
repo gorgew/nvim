@@ -34,7 +34,18 @@ map("n", "U", "<C-r>")
 -- Helix goto
 map("", "gl", "$", { remap = true })
 map("", "ge", "G", { remap = true })
+map("", "gh", "^", { remap = true })
 
 -- New line insert
 vim.keymap.set("n", "<CR>", "m`o<Esc>``")
 vim.keymap.set("n", "<S-CR>", "m`O<Esc>``")
+
+-- Kitty
+map("", "<c-h>", ":KittyNavigateLeft<cr>")
+map("", "<c-l>", ":KittyNavigateRight<cr>")
+map("", "<c-j>", ":KittyNavigateDown<cr>")
+map("", "<c-k>", ":KittyNavigateUp<cr>")
+
+-- Text editing
+map("n", "<leader>d", '"_d')
+map("n", "R", '"_diwP"')
