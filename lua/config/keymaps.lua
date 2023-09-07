@@ -49,3 +49,21 @@ map("", "<c-k>", ":KittyNavigateUp<cr>")
 -- Text editing
 map("n", "<leader>d", '"_d')
 map("n", "R", '"_diwP"')
+map("n", "x", '"_x')
+
+local function notify(cmd)
+    return string.format("<cmd>call VSCodeNotify('%s')<CR>", cmd)
+end
+
+local function v_notify(cmd)
+    return string.format("<cmd>call VSCodeNotifyVisual('%s', 1)<CR>", cmd)
+end
+-- VSCode
+if vim.g.vscode then
+  map("n", "<leader>f", notify "workbench.action.quickOpen")
+  map("n", "<leader>F", notify "workbench.action.findInFiles")
+  map("n", "<leader>e", notify "workbench.view.explorer")
+  map("n", "L", notify "workbench.action.nextEditor")
+  map("n", "H", notify "workbench.action.previousEditor")
+end
+  
