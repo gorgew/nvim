@@ -17,7 +17,7 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 -- vim.keymap.set("i", "hj", "<Esc>", { noremap = true })
-map("i", "hj", "<ESC>")
+-- map("i", "hj", "<ESC>")
 
 -- Unbind / Rebind existing <leader>f
 vim.keymap.del("n", "<leader>fn")
@@ -52,18 +52,18 @@ map("n", "R", '"_diwP"')
 map("n", "x", '"_x')
 
 local function notify(cmd)
-    return string.format("<cmd>call VSCodeNotify('%s')<CR>", cmd)
+  return string.format("<cmd>call VSCodeNotify('%s')<CR>", cmd)
 end
 
 local function v_notify(cmd)
-    return string.format("<cmd>call VSCodeNotifyVisual('%s', 1)<CR>", cmd)
+  return string.format("<cmd>call VSCodeNotifyVisual('%s', 1)<CR>", cmd)
 end
 -- VSCode
 if vim.g.vscode then
-  map("n", "<leader>f", notify "workbench.action.quickOpen")
-  map("n", "<leader>F", notify "workbench.action.findInFiles")
-  map("n", "<leader>e", notify "workbench.view.explorer")
-  map("n", "L", notify "workbench.action.nextEditor")
-  map("n", "H", notify "workbench.action.previousEditor")
+  map("n", "<leader>f", notify("workbench.action.quickOpen"))
+  map("n", "<leader>F", notify("workbench.action.findInFiles"))
+  map("n", "<leader>e", notify("workbench.view.explorer"))
+  map("n", "L", notify("workbench.action.nextEditor"))
+  map("n", "H", notify("workbench.action.previousEditor"))
+  map("n", "<leader>sd", notify("workbench.actions.view.problems"))
 end
-  

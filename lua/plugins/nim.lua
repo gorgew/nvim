@@ -1,12 +1,17 @@
 return {
   {
+
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        ocamllsp = {
-          mason = false,
-        },
+        nim_langserver = {},
       },
     },
+  },
+  {
+    --"alaviss/nim.nvim",
+  },
+  {
+    --""
   },
 }

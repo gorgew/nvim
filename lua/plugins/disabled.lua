@@ -1,10 +1,10 @@
 return {
   {
     "williamboman/mason.nvim",
-    enabled = false,
+    enabled = true,
   },
   {
-  "folke/flash.nvim",
+    "folke/flash.nvim",
     enabled = false,
-  }
+  },
 }
