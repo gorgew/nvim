@@ -21,6 +21,9 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.lang.go" },
     { import = "lazyvim.plugins.extras.ui.alpha" },
+    { import = "lazyvim.plugins.extras.lang.terraform" },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.tailwind" },
     { import = "plugins" },
   },
   defaults = {

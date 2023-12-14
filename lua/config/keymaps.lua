@@ -40,6 +40,9 @@ map("", "gh", "^", { remap = true })
 vim.keymap.set("n", "<CR>", "m`o<Esc>``")
 vim.keymap.set("n", "<S-CR>", "m`O<Esc>``")
 
+-- Center line
+map("n", "<leader><leader>", "z.")
+
 -- Kitty
 map("", "<c-h>", ":KittyNavigateLeft<cr>")
 map("", "<c-l>", ":KittyNavigateRight<cr>")
