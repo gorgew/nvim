@@ -19,6 +19,9 @@ return {
 			{ "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find files" },
 			{ "<leader>F", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
 			--{ "<leader>e", "<cmd>Telescope file_browser<cr>", desc = "Live grep" },
+			{ "<leader>ld", "<cmd>Telescope diagnostics<cr>", desc = "LSP Diagnostics" },
+
+			{ "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "LSP symbols" },
 		},
 	},
 	{

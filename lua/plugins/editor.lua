@@ -73,31 +73,34 @@ return {
 	},
 	{
 		"folke/todo-comments.nvim",
-		cmd = { "TodoTrouble", "TodoTelescope" },
-		config = true,
-		keys = {
-			{
-				"]t",
-				function()
-					require("todo-comments").jump_next()
-				end,
-				desc = "Next todo comment",
-			},
-			{
-				"[t",
-				function()
-					require("todo-comments").jump_prev()
-				end,
-				desc = "Previous todo comment",
-			},
-			{ "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
-			{ "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-			{ "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-			{ "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
 		},
 	},
 	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
+	},
+	{
+		"unblevable/quick-scope",
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	},
+	{
+		"yuttie/comfortable-motion.vim",
+		config = function()
+			vim.cmd([[
+                let g:comfortable_motion_scroll_down_key = "jzz"
+                let g:comfortable_motion_scroll_up_key = "kzz"
+                let g:comfortable_motion_friction = 2000.0
+            ]])
+		end,
 	},
 }
