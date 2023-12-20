@@ -34,3 +34,7 @@ vim.keymap.set("n", "n", "nzzzv") -- search center line
 vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("n", "Q", "<nop>")
+
+-- Indent
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
