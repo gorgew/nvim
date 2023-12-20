@@ -1,250 +1,119 @@
 return {
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			-- LSP Support
-			{ "williamboman/mason.nvim", cmd = "Mason", build = ":MasonUpdate" },
-			{
-				"williamboman/mason-lspconfig.nvim",
-				config = function(_, opts) end,
-			},
-		},
+    {
+        "VonHeikemen/lsp-zero.nvim",
+        branch = "v3.x",
+        lazy = true,
+        config = false,
+        init = function()
+            -- Disable automatic setup, we are doing it manually
+            vim.g.lsp_zero_extend_cmp = 0
+            vim.g.lsp_zero_extend_lspconfig = 0
+        end,
+    },
+    {
+        "williamboman/mason.nvim",
+        lazy = false,
+        config = true,
+    },
+    -- Autocompletion
+    {
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+        dependencies = {
+            { "L3MON4D3/LuaSnip" },
+        },
+        config = function()
+            -- Here is where you configure the autocompletion settings.
+            local lsp_zero = require("lsp-zero")
+            lsp_zero.extend_cmp()
 
-		opts = {
-			servers = {
-				tsserver = {
-					settings = {
+            -- And you can configure cmp even more, if you want to.
+            local cmp = require("cmp")
+            local cmp_action = lsp_zero.cmp_action()
 
-						typescript = {
-							inlayHints = {
-								includeInlayParameterNameHints = "literal",
-								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-								includeInlayFunctionParameterTypeHints = false,
-								includeInlayVariableTypeHints = false,
-								includeInlayPropertyDeclarationTypeHints = false,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
-						},
-						javascript = {
-							inlayHints = {
-								includeInlayParameterNameHints = "all",
-								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHints = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
-						},
-					},
-				},
-				lua_ls = {
-					settings = { Lua = { diagnostics = { globals = { "vim" } } } },
-				},
-				tailwindcss = {
-					settings = {
-						tailwindCSS = {
-							experimental = {
-								classRegex = {
-									{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		config = function(_, opts)
-			require("mason").setup()
-			local mason_lspconfig = require("mason-lspconfig")
-			local lsp_config = require("lspconfig")
+            cmp.setup({
+                formatting = lsp_zero.cmp_format(),
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-d>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-f>"] = cmp_action.luasnip_jump_forward(),
+                    ["<C-b>"] = cmp_action.luasnip_jump_backward(),
+                }),
+            })
+        end,
+    },
 
-			local lsp_capabilities = vim.tbl_deep_extend(
-				"force",
-				{},
-				vim.lsp.protocol.make_client_capabilities(),
-				require("cmp_nvim_lsp").default_capabilities()
-			)
+    -- LSP
+    {
+        "neovim/nvim-lspconfig",
+        cmd = { "LspInfo", "LspInstall", "LspStart" },
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            { "hrsh7th/cmp-nvim-lsp" },
+            { "williamboman/mason-lspconfig.nvim" },
+            { "lukas-reineke/lsp-format.nvim" },
+        },
+        config = function()
+            -- This is where all the LSP shenanigans will live
+            local lsp_zero = require("lsp-zero")
+            lsp_zero.extend_lspconfig()
 
-			local lsp_attach = function(client, bufnr)
-				local key_opts = { buffer = bufnr, remap = false }
+            lsp_zero.on_attach(function(client, bufnr)
+                -- see :help lsp-zero-keybindings
+                -- to learn the available actions
+                lsp_zero.default_keymaps({ buffer = bufnr })
+                if client.supports_method('textDocument/formatting') then
+                    require('lsp-format').on_attach(client)
+                end
+                local opts = { buffer = bufnr, remap = false }
 
-				-- Keymaps
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, key_opts)
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, key_opts)
-				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, key_opts)
-				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, key_opts)
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, key_opts)
-				vim.keymap.set("n", "[d", vim.diagnostic.goto_next, key_opts)
-				vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, key_opts)
-				vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, key_opts)
-				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, key_opts)
-				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, key_opts)
-				vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, key_opts)
+                vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+                vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+                vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+                vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+                vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+                vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+                vim.keymap.set('n', 'gK', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+                vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+                vim.keymap.set('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 
-				if client.name ~= "null-ls" then
-					client.server_capabilities.documentFormattingProvider = false
-				end
-			end
+                vim.keymap.set('n', 'cd', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
+                vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
+                vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
+            end)
 
-			mason_lspconfig.setup({
-				ensure_installed = {
-					"cssls",
-					"emmet_ls",
-					"eslint",
-					"jsonls",
-					"lua_ls",
-					"tailwindcss",
-					"tsserver",
-					-- linter
-					-- "eslint_d",
-					-- formatter
-					-- "stylua",
-					-- "prettierd",
-				},
-			})
-			mason_lspconfig.setup_handlers({
-				function(server_name)
-					lsp_config[server_name].setup({
-						on_attach = lsp_attach,
-						capabilities = lsp_capabilities,
-						settings = opts.servers[server_name] and opts.servers[server_name].settings or {},
-					})
-				end,
-			})
-
-			vim.diagnostic.config({
-				underline = true,
-				update_in_insert = false,
-				virtual_text = {
-					spacing = 4,
-					source = "if_many",
-				},
-				severity_sort = true,
-				float = {
-					focusable = true,
-					style = "minimal",
-					border = "rounded",
-					source = "always",
-					header = "",
-					prefix = "",
-				},
-			})
-		end,
-	},
-	{
-		"L3MON4D3/LuaSnip",
-		build = (not jit.os:find("Windows"))
-				and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
-			or nil,
-		-- dependencies = {
-		--   "rafamadriz/friendly-snippets",
-		--   config = function()
-		--     require("luasnip.loaders.from_vscode").lazy_load()
-		--   end,
-		-- },
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		version = false, -- last release is way too old
-		event = "InsertEnter",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"saadparwaiz1/cmp_luasnip",
-		},
-		config = function()
-			local has_words_before = function()
-				unpack = unpack or table.unpack
-				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-				return col ~= 0
-					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-			end
-
-			local luasnip = require("luasnip")
-			local cmp = require("cmp")
-			local compare = require("cmp.config.compare")
-
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp", priority = 1 },
-					{ name = "luasnip", priority = 5, keyword_length = 2 },
-					-- { name = "buffer", priority = 10, keyword_length = 3 },
-					{ name = "path", priority = 2 },
-				}),
-				mapping = cmp.mapping.preset.insert({
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.close(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-						-- they way you will only jump inside the snippet region
-						elseif luasnip.expand_or_locally_jumpable() then
-							luasnip.expand_or_jump()
-						elseif has_words_before() then
-							cmp.complete()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-			})
-		end,
-	},
-	{
-		"jose-elias-alvarez/null-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = { "mason.nvim" },
-		config = function()
-			local Util = require("config.util")
-			local null_ls = require("null-ls")
-			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-			null_ls.setup({
-				root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-				sources = {
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.prettierd,
-					null_ls.builtins.diagnostics.eslint_d,
-					null_ls.builtins.code_actions.eslint_d,
-				},
-				on_attach = function(client, bufnr)
-					if client.name == "null-ls" and client.supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = augroup,
-							buffer = bufnr,
-							callback = function()
-								if Util.format_on_save then
-									vim.lsp.buf.format({
-										formatting_options = { tabSize = 2, insert_spaces = true },
-										bufnr = bufnr,
-									})
-								end
-							end,
-						})
-					end
-				end,
-			})
-		end,
-	},
+            require("mason-lspconfig").setup({
+                ensure_installed = {},
+                handlers = {
+                    lsp_zero.default_setup,
+                    lua_ls = function()
+                        -- (Optional) Configure lua language server for neovim
+                        local lua_opts = lsp_zero.nvim_lua_ls()
+                        require("lspconfig").lua_ls.setup(lua_opts)
+                    end,
+                },
+            })
+        end,
+    },
+    {
+        "lukas-reineke/lsp-format.nvim",
+        config = function()
+            require("lsp-format").setup({})
+        end
+    },
+    {
+        "saadparwaiz1/cmp_luasnip",
+    },
+    {
+        "rafamadriz/friendly-snippets",
+    },
+    --[[
+    {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = function()
+            require("lsp_lines").setup()
+        end
+    }
+    ]] --
 }

@@ -31,3 +31,5 @@ require("lazy").setup("plugins", {
 		},
 	},
 })
+
+require("post")
