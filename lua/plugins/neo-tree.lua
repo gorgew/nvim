@@ -19,6 +19,7 @@ return {
                 ["l"] = "open",
             },
         },
+        popup_border_style = "rounded",
     },
     keys = {
         {

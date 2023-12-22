@@ -49,6 +49,7 @@ return {
                 "markdown",
                 "markdown_inline",
                 "python",
+                "odin",
                 "query",
                 "regex",
                 "toml",
