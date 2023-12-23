@@ -1,3 +1,4 @@
+--[[
 vim.api.nvim_create_augroup("neotree", {})
 vim.api.nvim_create_autocmd("UiEnter", {
     desc = "Open Neotree automatically",
@@ -8,6 +9,8 @@ vim.api.nvim_create_autocmd("UiEnter", {
         end
     end,
 })
+]]
+   --
 
 vim.cmd([[
 augroup highlight_yank

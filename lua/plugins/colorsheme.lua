@@ -18,6 +18,11 @@ return {
             --vim.cmd([[colorscheme noctis_viola]])
         end,
     },
+    --[[
+    {
+        "rktjmp/shipwright.nvim"
+    },
+    ]] --
     {
         "rktjmp/lush.nvim"
     },

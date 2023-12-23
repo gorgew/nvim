@@ -23,7 +23,8 @@ vim.keymap.set("", "<c-j>", ":KittyNavigateDown<cr>")
 vim.keymap.set("", "<c-k>", ":KittyNavigateUp<cr>")
 
 -- Void register
-vim.keymap.set("n", "<leader>d", '"_d')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+vim.keymap.set({ "n", "v" }, "<leader>c", '"_c')
 
 -- ThePrimagen
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
