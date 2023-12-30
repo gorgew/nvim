@@ -19,6 +19,9 @@ cmp.setup({
         ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
     }),
     formatting = cmp_format,
+    completion = {
+        completeopt = 'menu,menuone,noinsert'
+    }
 })
 
 -- Autoformat
