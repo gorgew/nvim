@@ -6,12 +6,23 @@ return {
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
         config = function()
+            local actions = require("telescope.actions")
+
             require("telescope").setup({
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<Esc>"] = require('telescope.actions').close
+                        }
+                    },
+                },
                 extensions = {
                     file_browser = {
                         --hijack_netrw = true,
                     },
+
                 },
+
             })
             require("telescope").load_extension("file_browser")
         end,
