@@ -9,7 +9,7 @@ vim.opt.softtabstop = 4  -- Number of spaces inserted instead of a TAB character
 vim.opt.shiftwidth = 4   -- Number of spaces inserted when indenting
 vim.opt.clipboard = "unnamed"
 vim.opt.colorcolumn = "80"
-vim.opt.wrap = true
+vim.opt.wrap = false
 
 vim.opt.scrolloff = 8
 

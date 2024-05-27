@@ -1,5 +1,5 @@
 return {
-    --{ import = "plugins.lang" },
+    { import = "plugins.lang" },
     "folke/neodev.nvim",
     {
         "folke/which-key.nvim",
@@ -9,5 +9,5 @@ return {
             vim.o.timeoutlen = 300
         end,
     },
-    { "folke/neoconf.nvim", cmd = "Neoconf" },
+    { "folke/neoconf.nvim",   cmd = "Neoconf" },
 }

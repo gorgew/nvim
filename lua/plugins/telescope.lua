@@ -16,6 +16,11 @@ return {
                         }
                     },
                 },
+                pickers = {
+                    colorscheme = {
+                        enable_preview = true
+                    }
+                },
                 extensions = {
                     file_browser = {
                         --hijack_netrw = true,
@@ -32,6 +37,7 @@ return {
             --{ "<leader>e", "<cmd>Telescope file_browser<cr>", desc = "Live grep" },
             { "<leader>ld", "<cmd>Telescope diagnostics<cr>",          desc = "LSP Diagnostics" },
             { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "LSP symbols" },
+            { "<leader>b",  "<cmd>Telescope buffers<cr>",              desc = "Live grep" },
         },
     },
     {

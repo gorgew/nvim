@@ -75,6 +75,7 @@ return {
                 vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
                 vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
                 vim.keymap.set('n', 'gK', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+
                 vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
                 vim.keymap.set('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 
@@ -88,7 +89,13 @@ return {
                     "cmake",
                     "rust_analyzer",
                     "ols",
-                    "zls"
+                    "zls",
+                    "tsserver",
+                    "html",
+                    "cssls",
+                    "tailwindcss",
+                    "jsonls",
+                    "jdtls",
                 },
                 handlers = {
                     lsp_zero.default_setup,
@@ -97,9 +104,25 @@ return {
                         local lua_opts = lsp_zero.nvim_lua_ls()
                         require("lspconfig").lua_ls.setup(lua_opts)
                     end,
+                    jdtls = lsp_zero.noop,
                 },
             })
         end,
+    },
+    {
+
+        "nvimtools/none-ls.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim"
+        }
+    },
+    {
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "nvimtools/none-ls.nvim",
+        },
     },
     {
         "lukas-reineke/lsp-format.nvim",
@@ -129,5 +152,5 @@ return {
             scope = 'line',
             show_borders = true
         }
-    }
+    },
 }

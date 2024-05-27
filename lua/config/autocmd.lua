@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("UiEnter", {
     end,
 })
 ]]
-   --
+--
 
 vim.cmd([[
 augroup highlight_yank
