@@ -19,6 +19,11 @@ return {
                 ["l"] = "open",
             },
         },
+        filesystem = {
+            filtered_items = {
+                hide_dotfiles = false
+            }
+        },
         popup_border_style = "rounded",
     },
     keys = {
@@ -32,7 +37,11 @@ return {
         {
             "<leader>e",
             function()
-                require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+                require("neo-tree.command").execute({
+                    toggle = true, 
+                    dir = vim.loop.cwd(),
+                    reveal = true
+                })
             end,
             desc = "Explorer NeoTree (cwd)",
         },

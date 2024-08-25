@@ -86,16 +86,17 @@ return {
 
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "cmake",
+                    "gopls",
                     "rust_analyzer",
                     "ols",
                     "zls",
                     "tsserver",
                     "html",
                     "cssls",
-                    "tailwindcss",
                     "jsonls",
                     "jdtls",
+                    "lua_ls",
+                    "tsserver"
                 },
                 handlers = {
                     lsp_zero.default_setup,
@@ -105,6 +106,15 @@ return {
                         require("lspconfig").lua_ls.setup(lua_opts)
                     end,
                     jdtls = lsp_zero.noop,
+                    gopls = function()
+                        require("lspconfig").gopls.setup({
+                            settings = {
+                                gopls = {
+                                    buildFlags = { "-tags=cluster,integration,debug" }
+                                },
+                            },
+                        })
+                    end
                 },
             })
         end,

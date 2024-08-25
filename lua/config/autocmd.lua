@@ -28,31 +28,3 @@ local function mod_hl(hl_name, opts)
     end
 end
 
-vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
-    group = vim.api.nvim_create_augroup('Color', {}),
-    pattern = "*",
-    callback = function()
-        --[[
-        mod_hl("TSInclude", { bold = true, italic = true })
-        mod_hl("TSKeywordReturn", { bold = true, italic = true })
-        mod_hl("TSConstBuiltin", { bold = true, italic = true })
-        ]]
-        --
-
-        -- mod_hl("DiagnosticError", { bg = "Red" })
-        -- mod_hl("DiagnosticUnderlineError", { bg = "Red" })
-        --
-        -- mod_hl("DiagnosticHint", { bg = "DarkCyan", fg = "White" })
-        -- mod_hl("DiagnosticUnderlineHint", { bg = "DarkCyan", fg = "White" })
-        --
-        -- mod_hl("DiagnosticWarn", { bg = "Orange", fg = "White" })
-        -- mod_hl("DiagnosticUnderlineWarn", { bg = "Orange", fg = "White" })
-        --
-        -- mod_hl("DiagnosticUnnecessary", { bg = "Orange", fg = "White" })
-    end
-})
-
--- Cursor color
-vim.cmd([[
-set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50
-]])
