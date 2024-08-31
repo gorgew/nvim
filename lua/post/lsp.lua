@@ -48,7 +48,9 @@ null_ls.setup({
     end,
     sources = {
         -- Replace these with the tools you want to install
-        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.prettier.with({
+            disabled_filetypes = { "graphql" }
+        }),
         -- null_ls.builtins.formatting.black,
         --         null_ls.builtins.diagnostics.eslint,
         -- null_ls.builtins.formatting.google_java_format,
@@ -79,4 +81,3 @@ end)
 vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
 vim.keymap.set('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
