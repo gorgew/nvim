@@ -4,7 +4,8 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-            "nvim-telescope/telescope-ui-select.nvim"
+            "nvim-telescope/telescope-ui-select.nvim",
+            "nvim-telescope/telescope-live-grep-args.nvim",
         },
         config = function()
             local actions = require("telescope.actions")
@@ -37,16 +38,18 @@ return {
             })
             require("telescope").load_extension("file_browser")
             require("telescope").load_extension("ui-select")
+            require("telescope").load_extension("live_grep_args")
         end,
         keys = {
-            { "<leader>f",  "<cmd>Telescope find_files<cr>",           desc = "Find files" },
-            { "<leader>F",  "<cmd>Telescope live_grep<cr>",            desc = "Live grep" },
+            { "<leader>f",  "<cmd>Telescope find_files<cr>",                                            desc = "Find files" },
+            { "<leader>F",  "<cmd>Telescope live_grep<cr>",                                             desc = "Live grep" },
             --{ "<leader>e", "<cmd>Telescope file_browser<cr>", desc = "Live grep" },
-            { "<leader>ld", "<cmd>Telescope diagnostics<cr>",          desc = "LSP Diagnostics" },
-            { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "LSP symbols" },
-            { "<leader>b",  "<cmd>Telescope buffers<cr>",              desc = "Live grep" },
-            { "<leader>gs", "<cmd>Telescope git_status<cr>",           desc = "Git status" },
-            { "gr",         "<cmd>Telescope lsp_references<cr>",       desc = "Git status" },
+            { "<leader>ld", "<cmd>Telescope diagnostics<cr>",                                           desc = "LSP Diagnostics" },
+            { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>",                                  desc = "LSP symbols" },
+            { "<leader>b",  "<cmd>Telescope buffers<cr>",                                               desc = "Live grep" },
+            { "<leader>gs", "<cmd>Telescope git_status<cr>",                                            desc = "Git status" },
+            { "gr",         "<cmd>Telescope lsp_references<cr>",                                        desc = "Git status" },
+            { "<leader>tr", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "Live grep args" },
         },
     },
     {

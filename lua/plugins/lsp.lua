@@ -110,7 +110,7 @@ return {
                         require("lspconfig").gopls.setup({
                             settings = {
                                 gopls = {
-                                    buildFlags = { "-tags=cluster,integration,debug" }
+                                    buildFlags = { "-tags=cluster,integration,debug,db" }
                                 },
                             },
                         })

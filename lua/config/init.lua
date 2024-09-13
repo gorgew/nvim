@@ -23,3 +23,8 @@ vim.opt.undofile = true
 vim.diagnostic.config({
     virtual_text = true,
 })
+
+vim.cmd([[
+set list
+set listchars=eol:↵,trail:~,tab:󰌒,nbsp:␣,space:·
+]])
