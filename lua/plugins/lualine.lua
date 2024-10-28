@@ -54,7 +54,7 @@ return {
                     lualine_x = {
                         { parsed_blame_text, cond = git_blame.is_blame_text_available }
                     }
-                }
+                },
             })
         end
     }

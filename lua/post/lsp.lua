@@ -71,13 +71,19 @@ local lsp_zero = require("lsp-zero")
 
 lsp_zero.on_attach(function(client, bufnr)
     --lsp_zero.default_keymaps({ buffer = bufnr })
-
-    if client.supports_method("textDocument/formatting") then
-        require("lsp-format").on_attach(client)
+    if client.server_capabilities.documentSymbolProvider then
+        require('nvim-navic').attach(client, bufnr)
+    end
+    -- if client.supports_method("textDocument/formatting") then
+    --     if client.name ~= "clangd" or client.name ~= "json" then
+    --         require("lsp-format").on_attach(client)
+    --     end
+    -- end
+    if client.name == "clangd" then
+        vim.keymap.set("n", "<leader>lh", "<cmd>ClangdSwitchSourceHeader<cr>", { buffer = true })
     end
 end)
 
 
 vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
 vim.keymap.set('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)

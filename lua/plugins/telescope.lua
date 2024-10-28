@@ -6,6 +6,7 @@ return {
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
             "nvim-telescope/telescope-ui-select.nvim",
             "nvim-telescope/telescope-live-grep-args.nvim",
+            "nvim-telescope/telescope-frecency.nvim",
         },
         config = function()
             local actions = require("telescope.actions")
@@ -17,6 +18,8 @@ return {
                             ["<Esc>"] = require('telescope.actions').close
                         }
                     },
+                    layout_strategy = 'flex',
+                    -- layout_config = { height = 0.95 },
                 },
                 pickers = {
                     colorscheme = {
@@ -31,14 +34,23 @@ return {
                         require("telescope.themes").get_dropdown {
                             -- even more opts
                         }
+                    },
+                    fzf = {
+                        fuzzy = true,                   -- false will only do exact matching
+                        override_generic_sorter = true, -- override the generic sorter
+                        override_file_sorter = true,    -- override the file sorter
+                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+                        -- the default case_mode is "smart_case"
                     }
-
                 },
 
             })
+            require("telescope").load_extension("fzf")
             require("telescope").load_extension("file_browser")
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("live_grep_args")
+            require("telescope").load_extension("git_signs")
+            require("telescope").load_extension("frecency")
         end,
         keys = {
             { "<leader>f",  "<cmd>Telescope find_files<cr>",                                            desc = "Find files" },
@@ -47,8 +59,12 @@ return {
             { "<leader>ld", "<cmd>Telescope diagnostics<cr>",                                           desc = "LSP Diagnostics" },
             { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>",                                  desc = "LSP symbols" },
             { "<leader>b",  "<cmd>Telescope buffers<cr>",                                               desc = "Live grep" },
+            { "<leader>j",  "<cmd>Telescope jumplist<cr>",                                              desc = "Jumplist" },
             { "<leader>gs", "<cmd>Telescope git_status<cr>",                                            desc = "Git status" },
-            { "gr",         "<cmd>Telescope lsp_references<cr>",                                        desc = "Git status" },
+            { "<leader>gh", "<cmd>Telescope git_signs<cr>",                                             desc = "Git hunks" },
+            { "gd",         "<cmd>Telescope lsp_definitions<cr>",                                       desc = "Goto definition" },
+            { "gr",         "<cmd>Telescope lsp_references<cr>",                                        desc = "Goto references" },
+            { "gt",         "<cmd>Telescope lsp_type_definitions<cr>",                                  desc = "Goto tyepdef" },
             { "<leader>tr", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "Live grep args" },
         },
     },
@@ -103,5 +119,12 @@ return {
                 }
             })
         end
+    },
+    {
+        "radyz/telescope-gitsigns",
+        dependencies = {
+            "lewis6991/gitsigns.nvim",
+            "nvim-telescope/telescope.nvim",
+        }
     }
 }

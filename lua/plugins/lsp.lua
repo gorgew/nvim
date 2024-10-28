@@ -86,17 +86,20 @@ return {
 
             require("mason-lspconfig").setup({
                 ensure_installed = {
+                    "clangd",
                     "gopls",
                     "rust_analyzer",
                     "ols",
                     "zls",
-                    "tsserver",
                     "html",
                     "cssls",
                     "jsonls",
                     "jdtls",
                     "lua_ls",
-                    "tsserver"
+                    "ts_ls",
+                    "pyright",
+                    "marksman",
+                    "dockerls",
                 },
                 handlers = {
                     lsp_zero.default_setup,
@@ -106,6 +109,13 @@ return {
                         require("lspconfig").lua_ls.setup(lua_opts)
                     end,
                     jdtls = lsp_zero.noop,
+                    pyright = function()
+                        require("lspconfig").pyright.setup({
+                            settings = {
+                                pyright = { extraPaths = { "~/memsql/py", "~/memsql/py/memsql" } }
+                            }
+                        })
+                    end,
                     gopls = function()
                         require("lspconfig").gopls.setup({
                             settings = {
