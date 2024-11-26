@@ -4,7 +4,8 @@ return {
         lazy = false,    -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
-            vim.cmd([[colorscheme pop-punk]])
+            -- vim.cmd([[colorscheme pop-punk]])
+            -- vim.cmd([[colorscheme darkblue]])
         end,
     },
     {
@@ -40,6 +41,13 @@ return {
             -- vim.cmd([[colorscheme rose-pine-dawn]])
         end,
     },
+    {
+        "nyoom-engineering/oxocarbon.nvim",
+        config = function()
+            -- vim.cmd([[colorscheme rose-pine-dawn]])
+            vim.cmd([[colorscheme oxocarbon]])
+        end,
+    }
     --[[
     {
         "rktjmp/shipwright.nvim"

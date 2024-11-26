@@ -3,7 +3,7 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Helix influenced keymaps
 
-vim.keymap.set("n", "U", "<C-r>")
+-- vim.keymap.set("n", "U", "<C-r>")
 -- Helix goto
 vim.keymap.set("", "gl", "$", { remap = true })
 vim.keymap.set("", "ge", "G", { remap = true })
