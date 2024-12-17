@@ -87,3 +87,4 @@ end)
 
 vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
 vim.keymap.set('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>', opts)
