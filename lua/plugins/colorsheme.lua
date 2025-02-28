@@ -47,7 +47,14 @@ return {
             -- vim.cmd([[colorscheme rose-pine-dawn]])
             vim.cmd([[colorscheme oxocarbon]])
         end,
+    },
+    {
+        "folke/tokyonight.nvim",
+        config = function()
+            -- vim.cmd([[colorscheme tokyonight-day]])
+        end,
     }
+
     --[[
     {
         "rktjmp/shipwright.nvim"

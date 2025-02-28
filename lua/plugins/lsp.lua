@@ -100,6 +100,7 @@ return {
                     "pyright",
                     "marksman",
                     "dockerls",
+                    "neocmake"
                 },
                 handlers = {
                     lsp_zero.default_setup,
