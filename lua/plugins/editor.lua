@@ -166,5 +166,6 @@ return {
                 winblend = 80
             })
         end
-    }
+    },
+    {'akinsho/git-conflict.nvim', version = "*", config = true}
 }
