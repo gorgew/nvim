@@ -167,5 +167,30 @@ return {
             })
         end
     },
-    {'akinsho/git-conflict.nvim', version = "*", config = true}
+    {
+        'akinsho/git-conflict.nvim',
+        version = "*",
+        config = function()
+            require('git-conflict').setup({
+                default_mappings = false
+            })
+        end,
+        keys = {
+            { "<leader>go", "<cmd>GitConflictChooseOurs<cr>",   desc = "Git Conflict Choose Ours" },
+            { "<leader>gt", "<cmd>GitConflictChooseTheirs<cr>", desc = "Git Conflict Choose Theirs" },
+            { "<leader>gb", "<cmd>GitConflictChooseBoth<cr>",   desc = "Git Conflict Choose Both" },
+            { "]g",         "<cmd>GitConflictNextConflict<cr>", desc = "Next conflict" },
+            { "[g",         "<cmd>GitConflictPrevConflict<cr>", desc = "Previous conflict" },
+        }
+    },
+    {
+        'tpope/vim-surround'
+    },
+    {
+        'kevinhwang91/nvim-fundo',
+        dependencies = { 'kevinhwang91/promise-async' },
+        config = function()
+            require('fundo').install()
+        end
+    }
 }

@@ -8,39 +8,39 @@ return {
             -- vim.cmd([[colorscheme darkblue]])
         end,
     },
-    {
-
-        "talha-akram/noctis.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            --vim.cmd([[colorscheme noctis_viola]])
-        end,
-    },
-    {
-
-        "atelierbram/Base2Tone-nvim",
-        lazy = false,
-        config = function()
-            -- vim.cmd([[colorscheme base2tone_pool_dark]])
-        end,
-    },
-    {
-
-        "atelierbram/Base4Tone-nvim",
-        lazy = false,
-        config = function()
-            --vim.cmd([[colorscheme noctis_viola]])
-        end,
-    },
-    {
-
-        "rose-pine/neovim",
-        lazy = false,
-        config = function()
-            -- vim.cmd([[colorscheme rose-pine-dawn]])
-        end,
-    },
+    -- {
+    --
+    --     "talha-akram/noctis.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         --vim.cmd([[colorscheme noctis_viola]])
+    --     end,
+    -- },
+    -- {
+    --
+    --     "atelierbram/Base2Tone-nvim",
+    --     lazy = false,
+    --     config = function()
+    --         -- vim.cmd([[colorscheme base2tone_pool_dark]])
+    --     end,
+    -- },
+    -- {
+    --
+    --     "atelierbram/Base4Tone-nvim",
+    --     lazy = false,
+    --     config = function()
+    --         --vim.cmd([[colorscheme noctis_viola]])
+    --     end,
+    -- },
+    -- {
+    --
+    --     "rose-pine/neovim",
+    --     lazy = false,
+    --     config = function()
+    --         -- vim.cmd([[colorscheme rose-pine-dawn]])
+    --     end,
+    -- },
     {
         "nyoom-engineering/oxocarbon.nvim",
         config = function()

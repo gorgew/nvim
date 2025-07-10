@@ -15,8 +15,8 @@ vim.opt.scrolloff = 8
 
 vim.opt.updatetime = 100
 
-vim.opt.number = true -- line numbers
-vim.opt.relativenumber = true
+-- vim.opt.number = true -- line numbers
+-- vim.opt.relativenumber = true
 
 vim.opt.undofile = true
 
@@ -30,8 +30,7 @@ vim.g.maplocalleader = ','
 
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
-
--- vim.opt.shortmess = "I"
+vim.opt.shortmess =  "ltToOCFI"
 
 -- vim.opt.guicursor =
 -- "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"

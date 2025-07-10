@@ -36,7 +36,7 @@ return {
                     auto_attach = false,
                     preference = nil,
                 },
-                highlight = false,
+                highlight = true,
                 separator = " > ",
                 depth_limit = 0,
                 depth_limit_indicator = "..",
@@ -47,8 +47,7 @@ return {
                     return text
                 end,
             }
-
-            vim.o.winbar = "%f> %{%v:lua.require'nvim-navic'.get_location()%}"
+            vim.api.nvim_create_user_command('Test', 'echo "It works!"', {})
         end
     }
 }

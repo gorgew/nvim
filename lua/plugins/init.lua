@@ -1,5 +1,5 @@
 return {
-    { import = "plugins.lang" },
+    -- { import = "plugins.lang" },
     "folke/neodev.nvim",
     {
         "folke/which-key.nvim",
