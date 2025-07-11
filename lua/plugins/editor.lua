@@ -194,10 +194,19 @@ return {
         end
     },
     -- {
+    --     'kevinhwang91/nvim-hlslens',
+    --     dependencies = { 'kevinhwang91/promise-async' },
+    --     config = function()
+    --         require('hlslens').setup()
+    --     end
+    -- },
+    -- {
     --     "lukas-reineke/indent-blankline.nvim",
     --     main = "ibl",
-    --     ---@module "ibl"
-    --     ---@type ibl.config
     --     opts = {},
-    -- }
+    -- },
+    {
+        "lukas-reineke/virt-column.nvim",
+        opts = {}
+    }
 }
