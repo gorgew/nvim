@@ -1,8 +1,8 @@
 function WinbarFile()
     if vim.bo.modified then
-        return "%#WinbarBold#%f*"
+        return "%#WinbarBold#%f*:%l"
     else
-        return "%f"
+        return "%f:%l"
     end
 end
 

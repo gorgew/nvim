@@ -8,8 +8,15 @@ vim.opt.smartindent = true
 vim.opt.softtabstop = 4  -- Number of spaces inserted instead of a TAB character
 vim.opt.shiftwidth = 4   -- Number of spaces inserted when indenting
 vim.opt.clipboard = "unnamedplus"
-vim.opt.colorcolumn = "80"
-vim.opt.wrap = false
+-- vim.opt.colorcolumn = "80"
+vim.opt.scl = "no"
+
+-- vim.opt.wrap = false
+vim.opt.breakindent = true
+vim.opt.breakindentopt = "shift:2,min:40"
+vim.opt.linebreak = true
+vim.opt.showbreak = "󱞵 "
+vim.opt.breakat = " ^I!@-+;,.?" -- Default with no *,/:
 
 vim.opt.scrolloff = 8
 
@@ -37,7 +44,11 @@ vim.opt.shortmess =  "ltToOCFI"
 
 --space:·
 
+vim.opt.list = true
+-- vim.opt.listchars="eol:↵,trail:~,tab:󰌒,nbsp:␣,multispace:·       "
+vim.opt.listchars="eol:↵,trail:~,tab:󰌒,nbsp:␣"
+
 vim.cmd([[
-set list
-set listchars=eol:↵,trail:~,tab:󰌒,nbsp:␣,
+" set list
+" set listchars=eol:↵,trail:~,tab:󰌒,nbsp:␣,multispace:·   
 ]])
