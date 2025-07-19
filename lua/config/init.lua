@@ -9,14 +9,14 @@ vim.opt.softtabstop = 4  -- Number of spaces inserted instead of a TAB character
 vim.opt.shiftwidth = 4   -- Number of spaces inserted when indenting
 vim.opt.clipboard = "unnamedplus"
 -- vim.opt.colorcolumn = "80"
-vim.opt.scl = "no"
+vim.opt.signcolumn= "auto:1"
 
 -- vim.opt.wrap = false
 vim.opt.breakindent = true
 vim.opt.breakindentopt = "shift:2,min:40"
 vim.opt.linebreak = true
 vim.opt.showbreak = "󱞵 "
-vim.opt.breakat = " ^I!@-+;,.?" -- Default with no *,/:
+vim.opt.breakat = " ^!@;,?"
 
 vim.opt.scrolloff = 8
 
